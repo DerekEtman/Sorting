@@ -4,11 +4,13 @@ arr2 = [2,4,6]
 def merge( arrA, arrB ):
     elements = len( arrA ) + len( arrB )
     merged_arr = [None] * elements
+    # creating placeholders for where we are in each arr
     a_index = 0
     b_index = 0
 
     # Loop through the length of  the combined elements
     for k in range(elements):
+        # if one arrA or arr B is empty merge the other list
         if a_index >= len(arrA):
             merged_arr[k] = arrB[b_index]
             b_index += 1
