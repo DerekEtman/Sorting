@@ -3,16 +3,18 @@ arr1 = [1,3,5]
 arr2 = [2,4,6]
 def merge( arrA, arrB ):
     elements = len( arrA ) + len( arrB )
-    merged_arr = [0] * elements
+    merged_arr = [None] * elements
     a_index = 0
     b_index = 0
-        
+
     # Loop through the length of  the combined elements
-    for k in range(len(merged_arr) - 1):
-        if a_index > len(arrA):
+    for k in range(elements):
+        if a_index >= len(arrA):
             merged_arr[k] = arrB[b_index]
-        elif b_index > len(arrB):
+            b_index += 1
+        elif b_index >= len(arrB):
             merged_arr[k] = arrA[a_index]
+            a_index += 1
         # if A[1] is smaller than B[1]
         elif arrA[a_index] < arrB[b_index]:
             # append A[1] to the merged array
@@ -32,9 +34,22 @@ merge(arr1,arr2)
 
 # TO-DO: implement the Merge Sort function below USING RECURSION
 def merge_sort( arr ):
-    # TO-DOz
+    # split the list into sublists until they are all length one or less 
+        # CEHCK IF LENGTH IS ONE OR LESS IF SO RETURN THE LIST
+        if len(arr) <= 1:
+            return arr
+        # divide in half
+        # call split function on left 
+        left = arr[:len(arr) // 2]
+        # call split function on right
+        right = arr[:len(arr) // 2: ]
+        # Sort the left
+        left = merge_sort(left)
+        # sort the right
+        right = merge_sort(right)
 
-    return arr
+        return merge(left, right)
+
 
 
 # STRETCH: implement an in-place merge sort algorithm
