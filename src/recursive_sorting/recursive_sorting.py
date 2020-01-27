@@ -1,17 +1,57 @@
-# TO-DO: complete the helpe function below to merge 2 sorted arrays
+# TO-DO: complete the helpcd  function below to merge 2 sorted arrays
+arr1 = [1,3,5]
+arr2 = [2,4,6]
 def merge( arrA, arrB ):
     elements = len( arrA ) + len( arrB )
-    merged_arr = [0] * elements
-    # TO-DO
-    
+    merged_arr = [None] * elements
+    # creating placeholders for where we are in each arr
+    a_index = 0
+    b_index = 0
+
+    # Loop through the length of  the combined elements
+    for k in range(elements):
+        # if one arrA or arr B is empty merge the other list
+        if a_index >= len(arrA):
+            merged_arr[k] = arrB[b_index]
+            b_index += 1
+        elif b_index >= len(arrB):
+            merged_arr[k] = arrA[a_index]
+            a_index += 1
+        # if A[1] is smaller than B[1]
+        elif arrA[a_index] < arrB[b_index]:
+            # append A[1] to the merged array
+            merged_arr[k] = arrA[a_index]
+            a_index += 1
+        # else
+        else:
+            # append B[1] to the end of the merged array  
+            merged_arr[k] = arrB[b_index]
+            b_index += 1
+
+    print(merged_arr)
     return merged_arr
+
+merge(arr1,arr2)
 
 
 # TO-DO: implement the Merge Sort function below USING RECURSION
 def merge_sort( arr ):
-    # TO-DO
+    # split the list into sublists until they are all length one or less 
+        # CEHCK IF LENGTH IS ONE OR LESS IF SO RETURN THE LIST
+        if len(arr) <= 1:
+            return arr
+        # divide in half
+        # call split function on left 
+        left = arr[:len(arr) // 2]
+        # call split function on right
+        right = arr[:len(arr) // 2: ]
+        # Sort the left
+        left = merge_sort(left)
+        # sort the right
+        right = merge_sort(right)
 
-    return arr
+        return merge(left, right)
+
 
 
 # STRETCH: implement an in-place merge sort algorithm
